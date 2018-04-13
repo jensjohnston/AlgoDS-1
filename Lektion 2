@@ -1,0 +1,30 @@
+MEMBER
+let rec member (v,l) =
+match l with
+[] -> false
+|h::t -> 
+if v=h
+then true 
+else member(v,t);;
+member(5,[5;6]);;
+member(4,[5;6]);;
+
+UNION
+let rec union (l1,l2) =
+match (l1,l2) with
+([],s2) -> s2
+|(h::t,s2) ->
+if member(h,s2)
+then union(t,s2)
+else h::union(t,s2);;
+
+union([2;3;4],[]);;
+
+INTERSECT
+let rec intersect (s,t) =
+match s with
+[] -> []
+|h::s ->
+if member(h,t)
+then h::intersect(s,t)
+else intersect(s,t);;
